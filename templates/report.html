@@ -1,0 +1,20 @@
+<h2>Pet Adoption Report</h2>
+<form method="POST">
+    Pet Type: <input type="text" name="type"><br>
+    Age From: <input type="number" name="min_age" value="0"><br>
+    Age To: <input type="number" name="max_age" value="30"><br>
+    <input type="submit" value="Generate Report">
+</form>
+
+{% if results %}
+<table border="1">
+    <tr><th>Type</th><th>Total</th><th>Average Age</th></tr>
+    {% for row in results %}
+    <tr>
+        <td>{{ row.type }}</td>
+        <td>{{ row.count }}</td>
+        <td>{{ "%.2f"|format(row.avg_age) }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
