@@ -1,10 +1,23 @@
 <h2>Pet Adoption Report</h2>
 <form method="POST">
-    Pet Type: <input type="text" name="type"><br>
-    Age From: <input type="number" name="min_age" value="0"><br>
-    Age To: <input type="number" name="max_age" value="30"><br>
+    Pet Type:
+    <select name="type">
+      <option value="">-- Choose a Type --</option>
+      {% for t in types %}
+        <option value="{{ t }}"
+          {% if request.form.type == t %}selected{% endif %}>
+          {{ t }}
+        </option>
+      {% endfor %}
+    </select><br>
+
+    Age From: <input type="number" name="min_age"
+                     value="{{ request.form.min_age or 0 }}"><br>
+    Age To:   <input type="number" name="max_age"
+                     value="{{ request.form.max_age or 30 }}"><br>
     <input type="submit" value="Generate Report">
 </form>
+
 
 {% if results %}
 <table border="1">
